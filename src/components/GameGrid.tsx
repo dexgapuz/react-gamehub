@@ -1,31 +1,8 @@
-import { useEffect, useState } from 'react';
-import ApiClient from '../services/ApiClient';
 import { Text } from '@chakra-ui/react';
-
-interface Game {
-  id: number;
-  slug: string;
-  name: string;
-  released: string;
-  tba: boolean;
-  backgroundImage: string;
-  rating: number;
-}
-
-interface GamesResponse {
-  count: number;
-  results: Game[];
-}
+import { useGames } from '../hooks/UseGames';
 
 const GameGrid = () => {
-  const [games, setGames] = useState<Game[]>([]);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    ApiClient.get<GamesResponse>('/games')
-      .then(({ data }) => setGames(data.results))
-      .catch((err) => setError(err.message));
-  }, []);
+  const { games, error } = useGames();
 
   return (
     <>
