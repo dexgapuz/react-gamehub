@@ -2,6 +2,12 @@ import { useEffect, useState } from "react";
 import ApiClient from "../services/ApiClient";
 import { CanceledError } from "axios";
 
+export interface Platform {
+    id: number;
+    name: string;
+    slug: string;
+}
+
 export interface Game {
     id: number;
     slug: string;
@@ -10,6 +16,7 @@ export interface Game {
     tba: boolean;
     background_image: string;
     rating: number;
+    parent_platforms: {platform: Platform}[]
 }
 
 interface GamesResponse {
